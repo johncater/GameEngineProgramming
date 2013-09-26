@@ -12,5 +12,5 @@ public:
 		
 	}
 
-	virtual std::size_t GetSize( ) = 0;
+	virtual void GetMemUsage( std::size_t & dynamicUsage, std::size_t & videoUsage ) = 0;
 };

@@ -1,52 +1,81 @@
 
 #include <ResourceManager\ResourceManager.h>
+#include <ResourceManager\ResourceObservationNote.h>
+#include <ResourceManager\ResourceFactory.h>
 
 ResourceManager * ResourceManager::Instance()
 {
-	throw nullptr;
+	static ResourceManager * rm = nullptr;
+	if( rm == nullptr )
+		rm = new ResourceManager( );
+	return rm;
 }
 
 ResourceManager::ResourceManager()
 {
-	throw nullptr;
+	m_SystemBudget = -1;
+	m_VideoBudget = -1;
+
+	m_SystemUsage = 0;
+	m_VideoUsage = 0;
 }
 
-void ResourceManager::AutoLoadRequestedAssets( bool shouldAutoLoad )
+ResourceManager::~ResourceManager()
+{
+
+}
+
+bool ResourceManager::ResourceIsLoaded( const std::string & resource )
 {
 	throw nullptr;
 }
 
-void ResourceManager::LoadPackage( ResourcePackage * package )
+void ResourceManager::LoadResource( const std::string & resource )
 {
-	throw nullptr;
-}
+	if( ResourceIsLoaded( resource ) )
+		return;
 
-void ResourceManager::AddResource( PackageDomain domain, Resource * newResource )
-{
-	throw nullptr;
-}
-
-void ResourceManager::RemoveResource( Resource * resource )
-{
-	throw nullptr;
+	ResourceFactory * rf = ResourceFactory::Instance( );
+	m_Resources[resource] = rf->LoadResource( resource );
 }
 
 void ResourceManager::SetMemoryBudget( MemType memoryType, std::size_t byteCount )
 {
-	throw nullptr;
+	switch( MemType::System )
+	{
+	case( MemType::System ): m_SystemBudget = byteCount; break;
+	case( MemType::Video ): m_VideoBudget = byteCount; break;
+	}
 }
 
 std::size_t ResourceManager::GetMemoryBudget( MemType memoryType )
 {
-	throw nullptr;
+	switch( memoryType )
+	{
+	case( MemType::System ): return m_SystemBudget;
+	case( MemType::Video ): return m_VideoBudget;
+	default: throw nullptr;
+	}
 }
 
 std::size_t ResourceManager::GetMemoryUsage( MemType memoryType )
 {
-	throw nullptr;
+	switch( memoryType )
+	{
+	case( MemType::System ): return m_SystemUsage;
+	case( MemType::Video ): return m_VideoUsage;
+	default: throw nullptr;
+	}
 }
 
-ResourcePackage * ResourceManager::GetPackage( PackageDomain domain )
+void ResourceManager::ReceiveNotify( Subject * source, int message, ObservedNote * notifyInfo )
 {
-	throw nullptr;
+	switch( message )
+	{
+	case( OBSERVE_RESOURCE_SIZE_CHANGED ):
+		auto note = (ResourceObservedNote *)notifyInfo;
+		m_SystemUsage += note->DynamicSizeChange;
+		m_VideoUsage += note->VideoSizeChange;
+		break;
+	}
 }

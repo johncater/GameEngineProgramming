@@ -3,7 +3,6 @@
 
 #include <Tests/TDK/TDK.h>
 #include <ResourceManager/ResourceManager.h>
-#include <ResourceManager/PixelMap.h>
 
 Test( ResourceManager_GetSetBudgets )
 {
@@ -16,23 +15,4 @@ Test( ResourceManager_GetSetBudgets )
 
 	TestAssertIsTrue( requestSize == rm->GetMemoryBudget( MemType::System ) );
 	TestAssertIsTrue( requestSize == rm->GetMemoryBudget( MemType::Video ) );
-}
-
-Test( ResourceManager_GetUsages )
-{
-	PixelMap texture( 10, 10 );
-
-	auto rm = ResourceManager::Instance( );
-	rm->AddResource( PackageDomain::Static, &texture );
-
-	TestAssertIsTrue( texture.GetSize( ) == rm->GetMemoryUsage( MemType::Video ) );
-}
-
-Test( ResourceManager_GetPackage )
-{
-	auto rm = ResourceManager::Instance( );
-	rm->GetPackage( PackageDomain::Static );
-	rm->GetPackage( PackageDomain::Dynamic );
-
-	TestFailMessage( "Needs to be updated, no testing actually done" );
 }

@@ -159,6 +159,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Source Files\ResourceManager\ResourceFactory.cpp" />
     <ClCompile Include="Source Files\AppMain.cpp" />
     <ClCompile Include="Source Files\Libraries.cpp" />
     <ClCompile Include="Source Files\Patterns\Observer\ObservationMediator.cpp" />
@@ -179,11 +180,11 @@
     <ClInclude Include="Headers\Patterns\Observer\ObservedNote.h" />
     <ClInclude Include="Headers\Patterns\Observer\Observer.h" />
     <ClInclude Include="Headers\Patterns\Observer\Subject.h" />
+    <ClInclude Include="Headers\ResourceManager\ResourceFactory.h" />
     <ClInclude Include="Headers\ResourceManager\ResourceObservationNote.h" />
-    <ClInclude Include="Headers\ResourceManager\PixelMap.h" />
+    <ClInclude Include="Headers\ResourceManager\Image.h" />
     <ClInclude Include="Headers\ResourceManager\Resource.h" />
     <ClInclude Include="Headers\ResourceManager\ResourceManager.h" />
-    <ClInclude Include="Headers\ResourceManager\ResourcePackage.h" />
     <ClInclude Include="Headers\Tests\ObservableTests.h" />
     <ClInclude Include="Headers\Tests\ResourceManagerTest.h" />
     <ClInclude Include="Headers\Tests\TDK\Assert.h" />
@@ -192,7 +193,6 @@
     <ClInclude Include="Headers\Tests\Tests.h" />
     <ClInclude Include="Headers\Utility\Hash\Hash.h" />
     <ClInclude Include="Headers\Utility\Hash\STL.h" />
-    <ClInclude Include="Headers\Utility\Dictionary.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

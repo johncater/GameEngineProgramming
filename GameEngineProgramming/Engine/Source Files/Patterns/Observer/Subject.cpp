@@ -2,8 +2,7 @@
 #include <Patterns/Observer/Observer.h>
 #include <Patterns/Observer/Subject.h>
 
-/* TODO: Be able to do Linq-like expressions/foreach(var x in Search(someList, someValue)) */
-/* (Visitor?) */
+#include <algorithm>
 
 Subject::~Subject( )
 {
